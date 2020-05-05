@@ -10,25 +10,30 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Index route
-app.get("/", (require, response) => {
+app.get("/", (request, response) => {
     response.sendFile(path.join(__dirname, "../../index.html"));
 });
 
 // Notes route
-app.get("/notes", (require, response) => {
+app.get("/notes", (request, response) => {
     response.sendFile(path.join(__dirname, "../../notes.html"));
 });
 
 // JSon Notes route
-app.get("/api/notes", (require, response) => {
+app.get("/api/notes", (request, response) => {
+
     fs.readFile("db.json", "utf-8", (err, data) => {
         console.log(data)
         return response.json(data)
     })
-
-
 });
 
+app.post("/api/notes", (request, response) => {
+    const newNote = request.body;
+
+    console.log(newNote);
+    response.json(newNote);
+});
 
 
 
