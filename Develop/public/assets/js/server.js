@@ -29,10 +29,14 @@ app.get("/api/notes", (request, response) => {
 });
 
 app.post("/api/notes", (request, response) => {
-    const newNote = request.body;
 
-    console.log(newNote);
-    response.json(newNote);
+    const newNote = JSON.stringify(request.body);
+
+    fs.writeFile('db.json', newNote, () => { });
+});
+
+app.delete("/api/notes/:id", (request, response) => {
+    const selectedNote = request.params.id;
 });
 
 
