@@ -23,20 +23,22 @@ app.get("/notes", (request, response) => {
 app.get("/api/notes", (request, response) => {
 
     fs.readFile("db.json", (err, data) => {
-        let parsedData = JSON.parse(data);
-        console.log(parsedData)
-        return response.json(parsedData)
+        let json = JSON.parse(data);
+        console.log(json);
+        return response.json(json);
     })
 });
 
 app.post("/api/notes", (request, response) => {
 
-    const newNote = JSON.stringify(request.body);
+    const data = fs.readFileSync("db.json");
+    const json = JSON.parse(data);
 
-    fs.appendFile('db.json', newNote, () => {
+    newData = request.body;
+    json.push(newData);
 
-    });
-    response.redirect("/");
+    fs.writeFileSync("db.json", JSON.stringify(json));
+    // response.redirect("/");
 });
 
 app.delete("/api/notes/:id", (request, response) => {
