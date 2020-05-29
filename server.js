@@ -11,12 +11,12 @@ app.use(express.json());
 
 // Index route
 app.get("/", (request, response) => {
-    response.sendFile(path.join(__dirname, "../../index.html"));
+    response.sendFile(path.join(__dirname, "index.html"));
 });
 
 // Notes route
 app.get("/notes", (request, response) => {
-    response.sendFile(path.join(__dirname, "../../notes.html"));
+    response.sendFile(path.join(__dirname, "notes.html"));
 });
 
 // Json Notes route
